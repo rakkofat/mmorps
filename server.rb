@@ -1,5 +1,4 @@
 require "sinatra"
-require 'pry'
 require_relative 'models/rps'
 
 use Rack::Session::Cookie, {
