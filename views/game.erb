@@ -1,47 +1,36 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Rock, Paper, Scissors</title>
-  </head>
-  <body>
-    <h1>MMORPS</h1>
+<h1>MMORPS</h1>
 
-    <% if session[:rounds] > 0 %>
-      <%= session[:outcome] %>
-    <% end %>
+<% if session[:rounds] > 0 %>
+  <%= session[:outcome] %>
+<% end %>
 
 
-    <table>
-      <thead>
-        <tr>
-          <th>Player</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Human:</td><td><%= session[:rps_game].player_score %></td></tr>
-        <tr><td>Computer:</td><td><%= session[:rps_game].computer_score %></td></tr>
-      </tbody>
-    </table>
+<table>
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Human:</td><td><%= session[:rps_game].player_score %></td></tr>
+    <tr><td>Computer:</td><td><%= session[:rps_game].computer_score %></td></tr>
+  </tbody>
+</table>
 
+<% unless session[:rps_game].winner? %>
+  <form action="/choose" method="post">
+    <h2>Choose!</h2>
 
-    <% unless session[:rps_game].winner? %>
-      <form action="/choose" method="post">
-        <h2>Choose!</h2>
+    <input type="submit" name="choice" value="Rock">
+    <input type="submit" name="choice" value="Paper">
+    <input type="submit" name="choice" value="Scissors">
+  </form>
+<% end %>
 
-        <input type="submit" name="choice" value="Rock">
-        <input type="submit" name="choice" value="Paper">
-        <input type="submit" name="choice" value="Scissors">
-      </form>
-    <% end %>
-
-    <% if session[:rps_game].winner? %>
-      <h3> <%= session[:rps_game].player_score == 2 ? "Player wins!" : "Computer wins!" %> </h3>
-      <form action="/reset" method="get">
-        <input type="submit" name="reset" value="Try Again">
-      </form>
-    <% end %>
-
-  </body>
-</html>
+<% if session[:rps_game].winner? %>
+  <h3> <%= session[:rps_game].player_score == 2 ? "Player wins!" : "Computer wins!" %> </h3>
+  <form action="/reset" method="get">
+    <input type="submit" name="reset" value="Try Again">
+  </form>
+<% end %>

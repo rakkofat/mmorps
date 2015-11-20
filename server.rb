@@ -7,13 +7,8 @@ use Rack::Session::Cookie, {
 }
 
 get '/' do
-  if session[:rounds].nil?
-    session[:rounds] = 0
-  end
-
-  if session[:rps_game].nil?
-    session[:rps_game] = RPS.new
-  end
+  session[:rounds] ||= 0
+  session[:rps_game] ||= RPS.new
   erb :game
 end
 
