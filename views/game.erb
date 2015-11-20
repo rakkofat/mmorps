@@ -7,8 +7,8 @@
   <body>
     <h1>MMORPS</h1>
 
-    <% if session[:rounds] >= 1 %>
-      <%= session[:rps_game].round_outcome(session[:choice]) %>
+    <% if session[:rounds] > 0 %>
+      <%= session[:outcome] %>
     <% end %>
 
 
@@ -38,10 +38,10 @@
 
     <% if session[:rps_game].winner? %>
       <h3> <%= session[:rps_game].player_score == 2 ? "Player wins!" : "Computer wins!" %> </h3>
-      <form action="/reset" method="post">
+      <form action="/reset" method="get">
         <input type="submit" name="reset" value="Try Again">
       </form>
     <% end %>
-    
+
   </body>
 </html>
